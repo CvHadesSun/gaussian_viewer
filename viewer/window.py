@@ -123,14 +123,15 @@ class GaussianSplattingGUI:
                 def callback(sender, app_data, user_data):
                     # print("Sender: ", sender)
                     # print("App Data: ", app_data)
+                    self.load_model = False
 
                     self.ply_file = app_data["selections"]["point_cloud.ply"]
 
-                    if not self.load_model:
-                        print("loading model file...")
-                        self.engine.load_ply(self.ply_file)
-                        print("loading model file done.")
-                        self.load_model = True
+                    # if not self.load_model:
+                    print("loading model file...")
+                    self.engine.load_ply(self.ply_file)
+                    print("loading model file done.")
+                    self.load_model = True
 
                 with dpg.file_dialog(
                     directory_selector=False,
