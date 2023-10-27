@@ -1,9 +1,11 @@
 class CONFIG:
-    width = 1075
-    height = 1912
+    window_width = 2160
+    window_height = 1200
+
+    width = 2160
+    height = 1200
 
     radius = 2
-    fovy = 60
 
     debug = False
     dt_gamma = 0.2
@@ -14,7 +16,7 @@ class CONFIG:
     convert_SHs_python = False
     compute_cov3D_python = False
 
-    white_background = True
+    white_background = False
 
     # ckpt TODO: load from gui window.
 

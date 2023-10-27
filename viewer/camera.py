@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.spatial.transform import Rotation as R
+from engine.utils.graphics_utils import getWorld2View2, focal2fov, fov2focal
 
 
 class OrbitCamera:
@@ -7,12 +8,13 @@ class OrbitCamera:
         self.W = W
         self.H = H
         self.radius = r  # camera distance from center
-        self.fovy = fovy  # in degree
         self.center = np.array([0, 0, 0], dtype=np.float32)  # look at this point
         self.rot = R.from_quat(
             [1, 0, 0, 0]
         )  # init camera matrix: [[1, 0, 0], [0, -1, 0], [0, 0, 1]] (to suit ngp convention)
         self.up = np.array([0, 1, 0], dtype=np.float32)  # need to be normalized!
+
+        self.fovy = fovy
 
     # pose
     @property
