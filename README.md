@@ -1,12 +1,7 @@
 a simple viewer to view gaussian-splatting model from free viewpoints.
 
-<video width="640" height="480" controls>
-  <sourc src="assets/legao.mp4" type="video/mp4">
-</video>
+![legao](assets/legao.gif)
 
-<video width="640" height="480" controls>
-  <sourc src="assets/bj-test.mp4" type="video/mp4">
-</video>
 
 # install 
 
