@@ -1,20 +1,23 @@
-a simple viewer to view gaussian-splatting model from free view.
+a simple viewer to view gaussian-splatting model from free viewpoints.
 
+<video width="640" height="480" controls>
+  <sourc src="assets/legao.mp4" type="video/mp4">
+</video>
 
-
-## todo
-
-1. save snapshot to dir
-2. load ply from gui, support drag ply into window.
-3. opt rot, trans, scale..
-4. document.
-5. use keyboard to rot, trans, scale...  [https://github.com/hoffstadt/DearPyGui/discussions/1416]
-
+<video width="640" height="480" controls>
+  <sourc src="assets/bj-test.mp4" type="video/mp4">
+</video>
 
 # install 
 
+test with cuda 11.3 and torch 1.12.1
+
 ```shell
-pip install -r doc/requirement.txt
+pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 \
+ torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113
+
+pip install opencv-python 
+pip install dearpygui
 
 pip install engine/submodules/diff-gaussian-rasterization
 pip install engine/submodules/simple-knn
@@ -23,6 +26,10 @@ pip install engine/submodules/simple-knn
 
 # run
 
+```shell
+python demo.py
+```
 
-
-# 
+# reference
+- [toch-ngp](https://github.com/ashawkey/torch-ngp)
+- [gaussian-splatting](https://github.com/graphdeco-inria/gaussian-splatting)

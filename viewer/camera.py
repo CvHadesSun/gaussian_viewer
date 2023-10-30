@@ -17,6 +17,10 @@ class OrbitCamera:
 
         self.fovy = fovy
 
+        self.translate = np.array([0, 0, self.radius])
+
+        self.scale_f = 1.0
+
     # pose
     @property
     def pose(self):
@@ -31,6 +35,25 @@ class OrbitCamera:
         res[:3, 3] -= self.center
         return res
 
+    @property
+    def opt_pose(self):
+        res = np.eye(4, dtype=np.float32)
+
+        res[:3, :3] = self.rot.as_matrix()
+
+        scale_mat = np.eye(4)
+        scale_mat[0, 0] = self.scale_f
+        scale_mat[1, 1] = self.scale_f
+        scale_mat[2, 2] = self.scale_f
+
+        transl = self.translate - self.center
+        transl_mat = np.eye(4)
+        transl_mat[:3, 3] = transl
+
+        # return transl_mat @ scale_mat @ res
+        # print(self.translate, self.scale_f)
+        return transl_mat @ scale_mat @ res
+
     # intrinsics
     @property
     def intrinsics(self):
@@ -44,10 +67,14 @@ class OrbitCamera:
         ]  # why this is side --> ? # already normalized.
         rotvec_x = self.up * np.radians(0.01 * dx)
         rotvec_y = side * np.radians(0.01 * dy)
+
+        # self.translate[0] += dx * 0.005
+        # self.translate[1] += dy * 0.005
         self.rot = R.from_rotvec(rotvec_x) * R.from_rotvec(rotvec_y) * self.rot
 
     def scale(self, delta):
-        self.radius *= 1.1 ** (-delta)
+        # self.radius *= 1.1 ** (-delta)
+        self.scale_f += 0.01 * delta + 0.0001
 
     def pan(self, dx, dy, dz=0):
         # pan in camera coordinate system (careful on the sensitivity!)

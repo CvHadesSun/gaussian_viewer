@@ -304,8 +304,8 @@ class GaussianSplattingGUI:
     def construct_camera(
         self,
     ) -> Camera:
-        R = self.camera.pose[:3, :3]
-        t = self.camera.pose[:3, 3]
+        R = self.camera.opt_pose[:3, :3]
+        t = self.camera.opt_pose[:3, 3]
 
         ss = math.pi / 180.0
         fovy = self.camera.fovy * ss
