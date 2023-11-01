@@ -20,4 +20,4 @@ class CONFIG:
 
     # ckpt TODO: load from gui window.
 
-    ply_path = "/home/swh/workspace/gaussian-splatting/output/ca6609db-5/point_cloud/iteration_30000/point_cloud.ply"
+    ply_path = "/home/swh/Downloads/weapons/weapons/hammer_model.ply"

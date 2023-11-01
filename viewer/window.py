@@ -5,6 +5,7 @@ import math
 
 from .camera import OrbitCamera
 import torch
+import os
 
 
 from engine.scene.cameras import Camera
@@ -49,6 +50,7 @@ class GaussianSplattingGUI:
         # print("loading model file...")
 
         # self.engine.load_ply(self.opt.ply_path)
+        # self.load_model = True
 
         # print("loading model file done.")
 
@@ -57,6 +59,8 @@ class GaussianSplattingGUI:
         dpg.create_context()
 
         self.register_dpg()
+
+        self.frame_id = 0
 
     def __del__(self):
         dpg.destroy_context()
@@ -124,8 +128,14 @@ class GaussianSplattingGUI:
                     # print("Sender: ", sender)
                     # print("App Data: ", app_data)
                     self.load_model = False
+                    file_data = app_data["selections"]
 
-                    self.ply_file = app_data["selections"]["point_cloud.ply"]
+                    file_names = []
+
+                    for key in file_data.keys():
+                        file_names.append(key)
+
+                    self.ply_file = file_data[file_names[0]]
 
                     # if not self.load_model:
                     print("loading model file...")
@@ -304,8 +314,14 @@ class GaussianSplattingGUI:
     def construct_camera(
         self,
     ) -> Camera:
+        out_dir = "/home/swh/dataset/3d_gaussian/dataset/auro_6_8/sucai6.8/new_views"
         R = self.camera.opt_pose[:3, :3]
         t = self.camera.opt_pose[:3, 3]
+
+        save_pth = os.path.join(out_dir, f"{self.frame_id:06d}.npy")
+
+        np.save(save_pth, self.camera.opt_pose)
+        self.frame_id += 1
 
         ss = math.pi / 180.0
         fovy = self.camera.fovy * ss
