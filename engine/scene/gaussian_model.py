@@ -305,6 +305,7 @@ class GaussianModel:
             if p.name.startswith("f_rest_")
         ]
         extra_f_names = sorted(extra_f_names, key=lambda x: int(x.split("_")[-1]))
+        self.max_sh_degree = int(((len(extra_f_names) + 3) / 3) ** 0.5) - 1
         assert len(extra_f_names) == 3 * (self.max_sh_degree + 1) ** 2 - 3
         features_extra = np.zeros((xyz.shape[0], len(extra_f_names)))
         for idx, attr_name in enumerate(extra_f_names):

@@ -6,3 +6,5 @@
 4. document.
 5. use keyboard to rot, trans, scale...  
 [https://github.com/hoffstadt/DearPyGui/discussions/1416] [https://github.com/madrury/py-glm]
+
+6. can load more than one ply model to render.
