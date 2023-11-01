@@ -314,14 +314,18 @@ class GaussianSplattingGUI:
     def construct_camera(
         self,
     ) -> Camera:
-        out_dir = "/home/swh/dataset/3d_gaussian/dataset/auro_6_8/sucai6.8/new_views"
+        # out_dir = "/home/swh/dataset/3d_gaussian/dataset/auro_6_8/sucai6.8/new_views"
         R = self.camera.opt_pose[:3, :3]
         t = self.camera.opt_pose[:3, 3]
 
-        save_pth = os.path.join(out_dir, f"{self.frame_id:06d}.npy")
+        # save_pth = os.path.join(out_dir, f"{self.frame_id:06d}.npy")
 
-        np.save(save_pth, self.camera.opt_pose)
-        self.frame_id += 1
+        # T = np.eye(4)
+        # T[:3, :3] = R
+        # T[:3, 3] = t
+
+        # np.save(save_pth, T)
+        # self.frame_id += 1
 
         ss = math.pi / 180.0
         fovy = self.camera.fovy * ss
@@ -347,7 +351,10 @@ class GaussianSplattingGUI:
 
         img = outputs["render"].permute(1, 2, 0)  #
 
-        img = img.detach().cpu().numpy().reshape(-1)
+        img = img.detach().cpu().numpy()
+
+        # img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+        img = img.reshape(-1)
 
         self.render_buffer = img
 
